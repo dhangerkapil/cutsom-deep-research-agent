@@ -641,24 +641,39 @@ async def root():
                 }
             }
 
-            // Enhanced result formatting with better structure
+            // Simple and reliable result formatting
             function formatResult(result) {
                 if (!result) return 'No result available';
                 
-                // Enhanced formatting with better visual structure
-                let formatted = result
-                    .replace(/\\*\\*(.*?)\\*\\*/g, '<h3>$1</h3>')
-                    .replace(/\\*(.*?)\\*/g, '<strong>$1</strong>')
-                    .replace(/## (.*?)$/gm, '<h2>$1</h2>')
-                    .replace(/# (.*?)$/gm, '<h1>$1</h1>')
-                    .replace(/\\n\\n/g, '</p><p>')
-                    .replace(/^/, '<p>')
-                    .replace(/$/, '</p>')
-                    .replace(/\\[Citation: (.*?)\\]/g, '<div class="citation">📚 Citation: $1</div>')
-                    .replace(/\\[Source: (.*?)\\]/g, '<div class="source">🔗 Source: $1</div>')
-                    .replace(/\[Note: (.*?)\]/g, '<div class="note">📝 Note: $1</div>');
-                
-                return formatted;
+                try {
+                    // Very simple cleanup to avoid regex issues
+                    let formatted = result;
+                    
+                    // Remove standalone # characters
+                    formatted = formatted.split('\\n#\\n').join('\\n');
+                    formatted = formatted.split('\\n#').join('\\n');
+                    formatted = formatted.replace(/^#$/gm, '');
+                    
+                    // Basic markdown formatting
+                    formatted = formatted.replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');
+                    formatted = formatted.replace(/\\*(.*?)\\*/g, '<em>$1</em>');
+                    formatted = formatted.replace(/^## (.+)/gm, '<h2>$1</h2>');
+                    formatted = formatted.replace(/^# (.+)/gm, '<h1>$1</h1>');
+                    
+                    // Convert newlines to HTML
+                    formatted = formatted.replace(/\\n\\n/g, '</p><p>');
+                    formatted = '<p>' + formatted + '</p>';
+                    
+                    // Clean up empty paragraphs
+                    formatted = formatted.replace(/<p><\\/p>/g, '');
+                    formatted = formatted.replace(/<p>(<h[1-6]>)/g, '$1');
+                    formatted = formatted.replace(/(<\\/h[1-6]>)<\\/p>/g, '$1');
+                    
+                    return formatted;
+                } catch (error) {
+                    console.error('Formatting error:', error);
+                    return '<p>' + result + '</p>'; // Fallback to plain text
+                }
             }
 
             // Form submission handler
