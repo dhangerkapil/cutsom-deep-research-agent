@@ -1,0 +1,330 @@
+# Deep Research Agents - Python/Azure Project
+# ==============================================
+
+# Python
+# ------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# -----------
+*.manifest
+*.spec
+
+# Installer logs
+# --------------
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+# ----------------------------
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+# ------------
+*.mo
+*.pot
+
+# Django/Flask
+# -------------
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+# -----
+instance/
+.webassets-cache
+
+# Scrapy
+# ------
+.scrapy
+
+# Sphinx documentation
+# --------------------
+docs/_build/
+docs/
+
+# PyBuilder
+# ---------
+.pybuilder/
+target/
+
+# Jupyter Notebook
+# ----------------
+.ipynb_checkpoints
+
+# IPython
+# -------
+profile_default/
+ipython_config.py
+
+# pyenv
+# -----
+.python-version
+
+# pipenv
+# ------
+Pipfile.lock
+
+# poetry
+# ------
+poetry.lock
+
+# pdm
+# ---
+.pdm.toml
+
+# PEP 582
+# -------
+__pypackages__/
+
+# Celery
+# ------
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+# --------------------
+*.sage.py
+
+# Environments
+# ------------
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+deepresearchagent/
+
+# Spyder project settings
+# -----------------------
+.spyderproject
+.spyproject
+
+# Rope project settings
+# ---------------------
+.ropeproject
+
+# mkdocs documentation
+# -------------------
+/site
+
+# mypy
+# ----
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+# -----------------
+.pyre/
+
+# pytype static type analyzer
+# ---------------------------
+.pytype/
+
+# Cython debug symbols
+# --------------------
+cython_debug/
+
+# Azure
+# -----
+.azure/
+*.azurePubxml
+*.azurePubxml.user
+
+# Azure Functions
+# ---------------
+local.settings.json
+bin/
+obj/
+
+# Azure DevOps
+# ------------
+.vscode/settings.json
+
+# Deep Research Agents Specific
+# =============================
+
+# Configuration files (contains sensitive data)
+# ---------------------------------------------
+config/project_config.yaml
+.env.*
+!.env.example
+
+# Logs and Debug Files
+# -------------------
+*.log
+logs/
+debug_logs/
+agent_logs/
+deep_research_agent.log
+research_*.log
+
+# Research Output and Reports
+# --------------------------
+reports/
+research_output/
+report*
+results/
+output/
+
+# Temporary and Cache Files
+# ------------------------
+temp/
+tmp/
+cache/
+.cache/
+*.tmp
+*.temp
+
+# AI/ML Model Files (if any)
+# --------------------------
+models/
+*.model
+*.pkl
+*.pickle
+*.h5
+*.pt
+*.pth
+
+# Data Files (often large or sensitive)
+# -------------------------------------
+data/
+datasets/
+*.csv
+*.json
+*.xml
+*.parquet
+*.xlsx
+*.xls
+!**/config/**/*.json
+!**/config/**/*.yaml
+!**/config/**/*.yml
+
+# Media Files
+# -----------
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.svg
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.pdf
+*.doc
+*.docx
+
+# IDE and Editor Files
+# -------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS Files
+# --------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js (if any frontend components)
+# ------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archives
+# --------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Backup files
+# ------------
+*.bak
+*.backup
+*.old
+*.orig
+
+# Test artifacts
+# --------------
+test-results/
+test_output/
+coverage/
+
+# Deployment artifacts
+# --------------------
+deployment/
+deploy/
+.deployment
+
+# Personal notes and documentation
+# --------------------------------
+NOTES.md
+TODO.md
+personal/
+private/
+
+# Development databases
+# --------------------
+*.db
+*.sqlite
+*.sqlite3

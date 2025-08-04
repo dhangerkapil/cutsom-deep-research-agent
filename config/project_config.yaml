@@ -1,0 +1,88 @@
+# Research Agent Configuration - Anonymized Version
+# Only includes configuration keys that are actually used in the codebase
+
+# === CORE SYSTEM CONFIGURATION ===
+# Company information (used by PromptManager)
+system:
+  company:
+    name: "Contoso Corporation"          # English company name - used in company context
+    display_name: "Contoso Corporation"      # display name - used in company context
+    language: "en"                       # Default language - used for language detection
+
+# === DATA SOURCES CONFIGURATION ===
+# Azure AI Search index configuration (used by get_document_type_config)
+data_sources:
+  # Web search configuration
+  web_search:
+    enabled: true                        # Enable/disable web search functionality
+    fallback_enabled: true               # Enable web search as fallback when other sources fail
+    max_results: 10                      # Maximum number of results from web search
+    timeout: 60                          # Timeout in seconds for web search requests
+    
+  document_types:
+    # Required for search functionality - minimal configuration
+    category_a_documents:
+      func_description: "Azure AI foundry documentation for ai enthusiasts. Provides insights into AI technologies and applications."
+      index_name: "deep-research1"                               # Azure AI Search index name
+      semantic_config: "deep-research1-semantic-configuration"   # Semantic search configuration
+      vector_field: "text_vector"                                   # Vector search field
+      key_fields:                                                         # Key fields for search
+        - "chunk_id"
+        - "title"
+        - "chunk"
+      content_fields:                                                     # Content fields for search
+        - "chunk"
+        - "title"
+
+    
+    category_b_documents:
+      func_description: "Azure AI foundry documentation for ai enthusiasts. Provides insights into AI technologies and applications."
+      index_name: "deep-research2"                               # Azure AI Search index name
+      semantic_config: "deep-research2-semantic-configuration"   # Semantic search configuration
+      vector_field: "text_vector"                                   # Vector search field
+      key_fields:                                                         # Key fields for search
+        - "chunk_id"
+        - "title"
+        - "chunk"
+      content_fields:                                                     # Content fields for search
+        - "chunk"
+        - "title"
+    
+    category_c_documents:
+      func_description: "Azure AI foundry documentation for ai enthusiasts. Provides insights into AI technologies and applications."
+      index_name: "deep-research3"                               # Azure AI Search index name
+      semantic_config: "deep-research3-semantic-configuration"   # Semantic search configuration
+      vector_field: "text_vector"                                   # Vector search field
+      key_fields:                                                         # Key fields for search
+        - "chunk_id"
+        - "title"
+        - "chunk"
+      content_fields:                                                     # Content fields for search
+        - "chunk"
+        - "title"
+    
+# === AGENT CONFIGURATIONS ===
+# Agent behavior settings
+agents:
+  # Temperature variations (used by temperature management)
+  temperature_variations:
+    conservative:
+      temp: 0.2
+      approach: "Conservative detailed analysis"
+      description: "Thorough fact-based analysis with focus on accuracy"
+    balanced:
+      temp: 0.6
+      approach: "Balanced analysis"
+      description: "Comprehensive analysis balancing facts and insights"
+    creative:
+      temp: 0.9
+      approach: "Creative analysis"
+      description: "Innovative analysis exploring multiple perspectives"
+
+  # Credibility critic assessment (used by credibility critic agent)
+  credibility_critic:
+    assessment:
+      score_ranges:
+        high: "8.0-10.0"
+        medium: "5.0-7.9"
+        low: "1.0-4.9"

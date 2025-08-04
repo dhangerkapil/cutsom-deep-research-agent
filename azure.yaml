@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: deep-research-agents
+metadata:
+  template: deep-research-agents@0.0.1-beta
+services:
+  web:
+    project: .
+    host: appservice
+    language: python
+hooks:
+  postdeploy:
+    shell: pwsh
+    run: |
+      echo "🎉 Deep Research Agents deployed successfully!"
+      echo "🌐 Application URL: $env:SERVICE_WEB_URI"
+      echo "📊 Check application logs in Azure Portal"

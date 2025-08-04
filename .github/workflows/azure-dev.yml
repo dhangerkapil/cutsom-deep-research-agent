@@ -1,0 +1,89 @@
+name: Deploy Deep Research Agents
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+  AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+  AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+  AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install azd
+        uses: Azure/setup-azd@v1.0.0
+
+      - name: Log in with Azure (Federated Credentials)
+        if: ${{ env.AZURE_CLIENT_ID != '' }}
+        run: |
+          azd auth login `
+            --client-id "$Env:AZURE_CLIENT_ID" `
+            --federated-credential-provider "github" `
+            --tenant-id "$Env:AZURE_TENANT_ID"
+        shell: pwsh
+
+      - name: Log in with Azure (Client Credentials)
+        if: ${{ env.AZURE_CLIENT_ID == '' }}
+        run: |
+          $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable
+          Write-Host "::add-mask::$($info.clientSecret)"
+
+          azd auth login `
+            --client-id "$($info.clientId)" `
+            --client-secret "$($info.clientSecret)" `
+            --tenant-id "$($info.tenantId)"
+        shell: pwsh
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set azd environment variables
+        run: |
+          azd env set AZURE_OPENAI_API_KEY "${{ secrets.AZURE_OPENAI_API_KEY }}"
+          azd env set AZURE_SEARCH_API_KEY "${{ secrets.AZURE_SEARCH_API_KEY }}"
+          azd env set TAVILY_API_KEY "${{ secrets.TAVILY_API_KEY }}"
+
+      - name: Provision Infrastructure
+        run: azd provision --no-prompt
+        env:
+          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy Application
+        run: azd deploy --no-prompt
+
+      - name: Run Health Check
+        run: |
+          $uri = azd env get-values --output json | ConvertFrom-Json | Select-Object -ExpandProperty SERVICE_WEB_URI
+          Write-Host "Testing health endpoint: $uri/health"
+          
+          # Wait for deployment to be ready
+          Start-Sleep -Seconds 30
+          
+          # Test health endpoint
+          $response = Invoke-RestMethod -Uri "$uri/health" -Method GET
+          Write-Host "Health check response: $($response | ConvertTo-Json -Depth 10)"
+          
+          if ($response.status -eq "healthy") {
+            Write-Host "✅ Application is healthy and ready!"
+          } else {
+            Write-Host "❌ Application health check failed"
+            exit 1
+          }
+        shell: pwsh
