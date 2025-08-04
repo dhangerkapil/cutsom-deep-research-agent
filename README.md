@@ -1,243 +1,241 @@
-# 🔬 Deep Research Agents
+# 🔬 Deep Research Agent
 
-AI agent system that automates internal document search and deep research for enterprises
+Enterprise-grade AI research platform for automated document analysis and intelligent reporting
 
 ## 🎯 Overview
-Deep Research Agents is a next-generation MultiAgent system built on **Semantic Kernel**. Through **MagenticOrchestration**, multiple specialized AI agents dynamically collaborate to automatically generate high-quality research reports from enterprise internal documents. From internal document search via Azure AI Search, Semantic Kernel Memory, to comprehensive reliability assessment, it intelligently automates the entire enterprise research process.
+The Deep Research Agent represents an advanced multi-agent artificial intelligence framework powered by **Microsoft Semantic Kernel**. Utilizing sophisticated **MagenticOrchestration** technology, this system coordinates multiple AI specialists to autonomously produce comprehensive research outputs from organizational knowledge bases. The platform seamlessly integrates document discovery through Azure AI Search and Semantic Kernel Memory with advanced quality validation to deliver end-to-end enterprise research automation.
 
-### 🌟 Key Features
+### 🌟 Core Capabilities
 
-- **🤖 Magentic Multi-Agent Orchestration**: Latest orchestration technology from Semantic Kernel
-- **🔍 Advanced Internal Document Search**: Azure AI Search + Semantic Kernel Memory integration
-- **🌐 Web Search Integration**: Enhanced research capabilities with external web search fallback
-- **🧠 Contextual Memory Management**: Persistent research context and knowledge integration via Semantic Kernel Memory
-- **🛡️ AI Reliability Assessment**: Multi-layered Confidence evaluation and source quality management
-- **📝 Structured Report Generation**: Evidence-based reports with citation management
-- **🌐 Multilingual Intelligence**: Professional terminology translation system
-- **⚡ Dynamic Quality Management**: Real-time quality assessment and self-improvement loops
+- **🤖 Intelligent Agent Coordination**: Advanced orchestration using cutting-edge Semantic Kernel technology
+- **🔍 Enterprise Document Discovery**: Seamless integration with Azure AI Search and Semantic Kernel Memory
+- **🌐 Hybrid Search Technology**: Combines internal knowledge bases with external web research capabilities
+- **🧠 Persistent Knowledge Management**: Continuous context preservation via Semantic Kernel Memory integration
+- **🛡️ Comprehensive Quality Assurance**: Advanced confidence scoring and multi-tier source validation
+- **📝 Professional Report Creation**: Automated generation of evidence-backed reports with complete citation tracking
+- **🌐 Cross-Language Support**: Advanced translation capabilities with domain-specific terminology handling
+- **⚡ Adaptive Quality Control**: Intelligent monitoring and continuous improvement mechanisms
 
-## 🏗️ Architecture
+## 🏗️ System Architecture
 
-Deep Research Agents is a next-generation MultiAgent system centered on **Microsoft Semantic Kernel** and **MagenticOrchestration**. It fully automates internal document search, analysis, and report generation specialized for enterprise R&D.
+The Deep Research Agent leverages a sophisticated multi-agent architecture built on **Microsoft Semantic Kernel** with **MagenticOrchestration** at its core. This design enables complete automation of enterprise research workflows, from document discovery through final report delivery.
 
-### 🎭 System Overview Diagram
+### 🎭 Architecture Overview
 
 ```
                          ┌─────────────────────────────────┐
-                         │    MagenticOrchestration        │
-                         │  (StandardMagenticManager)      │
-                         │     + R&D Logic Engine          │
+                         │   MagenticOrchestration Hub     │
+                         │ (StandardMagenticManager Core)  │
+                         │    + Enterprise Logic Layer     │
                          └──────────┬──────────────────────┘
-                                    │ Dynamic Coordination
+                                    │ Intelligent Coordination
                                     ▼
    ┌─────────────────────────────────────────────────────────────────┐
-   │                     Specialized Agent System                    │
-   │                    (Semantic Kernel Agents)                     │
+   │                   Multi-Agent Intelligence Network              │
+   │                  (Semantic Kernel Foundation)                   │
    │                                                                 │
    │  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐    │
-   │  │ LeadResearcher  │ │ Credibility     │ │   Summarizer    │    │
-   │  │    Agent        │ │ Critic Agent    │ │     Agent       │    │
-   │  │ ┌─────────────┐ │ │ (Source Quality │ │ (Knowledge      │    │
-   │  │ │RESEARCHER1  │ │ │  Assessment)    │ │  Synthesis)     │    │
-   │  │ │RESEARCHER2  │ │ │                 │ │                 │    │
-   │  │ │RESEARCHER3+ │ │ │                 │ │                 │    │
+   │  │ Research Team   │ │ Quality Control │ │  Knowledge      │    │
+   │  │    Leader       │ │    Specialist   │ │  Synthesizer    │    │
+   │  │ ┌─────────────┐ │ │ (Source        │ │ (Information    │    │
+   │  │ │ANALYST_01   │ │ │ Validation)     │ │  Integration)   │    │
+   │  │ │ANALYST_02   │ │ │                 │ │                 │    │
+   │  │ │ANALYST_03+  │ │ │                 │ │                 │    │
    │  │ └─────────────┘ │ │                 │ │                 │    │
    │  └─────────────────┘ └─────────────────┘ └─────────────────┘    │
    │                                                                 │
    │  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐    │
-   │  │ ReportWriter    │ │ Reflection      │ │  Translator     │    │
-   │  │    Agent        │ │ Critic Agent    │ │    Agent        │    │
-   │  │ (Confidence +   │ │ (Quality        │ │ (Professional   │    │
-   │  │  Citations)     │ │  Validation)    │ │  Translation)   │    │
+   │  │ Documentation   │ │ Quality Review  │ │  Language       │    │
+   │  │   Specialist    │ │   Coordinator   │ │ Processing      │    │
+   │  │ (Evidence +     │ │ (Standards      │ │ (Professional   │    │
+   │  │  Confidence)    │ │  Compliance)    │ │  Translation)   │    │
    │  └─────────────────┘ └─────────────────┘ └─────────────────┘    │
    │                                                                 │
    │  ┌─────────────────┐                                            │
-   │  │  Citation       │                                            │
-   │  │    Agent        │                                            │
-   │  │ (Reference      │                                            │
-   │  │  Management)    │                                            │
+   │  │  Reference      │                                            │
+   │  │  Management     │                                            │
+   │  │ (Citation       │                                            │
+   │  │  Tracking)      │                                            │
    │  └─────────────────┘                                            │
    └─────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
    ┌─────────────────────────────────────────────────────────────────┐
-   │                     Plugin & Infrastructure Layer               │
+   │                  Infrastructure & Plugin Services               │
    │                                                                 │
    │  ┌─────────────────┐ ┌─────────────────┐                        │
-   │  │  Memory        │ │ ModularSearch   │                        │
-   │  │   Plugin        │ │    Plugin       │                        │
+   │  │  Knowledge      │ │ Search Engine   │                        │
+   │  │  Repository     │ │   Integration   │                        │
    │  │ (Research       │ │ (Azure AI       │                        │
-   │  │  Context)       │ │  Search)        │                        │
+   │  │  Memory)        │ │  Platform)      │                        │
    │  └─────────────────┘ └─────────────────┘                        │
    └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 🔬 Internal Document Search System
+### 🔬 Enterprise Document Discovery Platform
 
-**ModularSearchPlugin** provides comprehensive search capabilities:
+**Advanced Search Integration** delivers powerful information retrieval capabilities:
 
-An Azure AI Search integration system dynamically configured based on project settings (`config/project_config.yaml`). It provides unified interface search functionality across multiple indexes defined in configuration files.
+The platform features a comprehensive Azure AI Search integration that adapts dynamically to project specifications defined in `config/project_config.yaml`. This unified search interface operates across multiple organizational indexes configured through centralized configuration management.
 
-The search system flexibly adapts to enterprise-specific document structures and index configurations, achieving high-precision information retrieval through a combination of Vector search, Semantic search, and Full-text search.
+The search architecture demonstrates remarkable flexibility, accommodating diverse enterprise document structures and index configurations. It achieves superior information discovery through the strategic combination of Vector-based search, Semantic understanding, and traditional Full-text indexing methodologies.
 
-#### 🌐 Web Search Integration
+#### 🌐 Hybrid Research Capabilities
 
-**Enhanced Research Capabilities**: The system now includes web search functionality as an additional information source and fallback mechanism:
+**Comprehensive Information Gathering**: The platform incorporates advanced web search capabilities to supplement internal knowledge sources:
 
-- **Primary Search**: Internal document search via Azure AI Search
-- **Web Search Fallback**: When internal sources are insufficient, the system automatically falls back to web search
-- **Configurable Integration**: Web search can be enabled/disabled and configured via `project_config.yaml`
-- **Quality Assurance**: Web search results undergo the same reliability assessment as internal documents
+- **Primary Information Source**: Internal document discovery via Azure AI Search infrastructure
+- **Secondary Research Layer**: Automatic web search activation when internal sources prove insufficient
+- **Flexible Configuration**: Complete control over web search features through `project_config.yaml` settings
+- **Unified Quality Standards**: All external search results undergo identical reliability validation as internal documents
 
 <details>
 <summary>
 
-### 🎭 Specialized Agent Configuration
+### 🎭 Intelligent Agent Specialization
 
 </summary>
 
-#### 1. **LeadResearcherAgent** 🎯 *Lead Researcher*
-   - **Role**: Manager and coordinator of multiple internal sub-ResearchAgents
-   - **Architecture**: Contains and orchestrates 3+ sub-ResearchAgents (RESEARCHER1, RESEARCHER2, RESEARCHER3...)
-   - **Special Capability**: Parallel orchestration and concurrent execution of multiple research queries
-   - **Implementation**: Internal agent management via `ConcurrentOrchestration` and `ParallelResearchPlugin`
-   - **Functions**: 
-     - Distributes research queries across sub-ResearchAgents
-     - Aggregates and synthesizes results from multiple agents
-     - Quality management and result integration
-     - Dynamic agent scaling based on workload
-   - **Memory**: Context continuation through Semantic Kernel Memory integration shared across all sub-agents
+#### 1. **Research Team Leader** 🎯 *Primary Coordinator*
+   - **Primary Function**: Orchestrates and manages multiple specialized research sub-agents
+   - **Technical Design**: Coordinates 3+ dedicated research units (ANALYST_01, ANALYST_02, ANALYST_03+)
+   - **Advanced Features**: Parallel task distribution and simultaneous query processing capabilities
+   - **Technical Implementation**: Leverages `ConcurrentOrchestration` and `ParallelResearchPlugin` for agent management
+   - **Core Operations**: 
+     - Strategic distribution of research tasks across specialized units
+     - Intelligent synthesis and consolidation of multi-agent findings
+     - Advanced quality control and result harmonization
+     - Dynamic scaling of agent resources based on workload requirements
+   - **Knowledge Persistence**: Shared context management through Semantic Kernel Memory across all research units
 
-#### 2. **CredibilityCriticAgent** 🔍 *Reliability Assessment Specialist*
-   - **Role**: Scientific evaluation of internal source reliability and coverage
-   - **Evaluation Criteria**: Source quality, information consistency, evidence strength
-   - **Functions**: Supplementation through additional searches, reliability score calculation
-   - **Output**: Structured reliability reports + improvement recommendations
+#### 2. **Quality Control Specialist** 🔍 *Reliability Assessment Expert*
+   - **Primary Function**: Comprehensive evaluation of source credibility and information coverage
+   - **Assessment Framework**: Source authenticity, information consistency, and evidence robustness
+   - **Operational Scope**: Gap identification through supplementary research, credibility scoring algorithms
+   - **Deliverables**: Detailed reliability assessments with actionable improvement recommendations
 
-#### 3. **SummarizerAgent** 📋 *Knowledge Integration Specialist*
-   - **Role**: Structured summarization of large volumes of internal documents
-   - **Specialization**: Classification by enterprise themes, prioritization
-   - **Technology**: Hierarchical summarization, keyword extraction, relevance analysis
-   - **Output**: Structured summaries + key point extraction
+#### 3. **Knowledge Synthesizer** 📋 *Information Integration Expert*
+   - **Primary Function**: Advanced summarization of extensive organizational document collections
+   - **Domain Expertise**: Enterprise-specific content categorization and priority assessment
+   - **Technical Capabilities**: Multi-level summarization, intelligent keyword extraction, relevance scoring
+   - **Output Generation**: Structured knowledge summaries with key insight identification
 
-#### 4. **ReportWriterAgent** ✍️ *Report Generation Specialist*
-   - **Role**: Final report creation and Confidence score assignment
-   - **Technology**: Structured document generation, citation management, evidence demonstration
-   - **Evaluation**: Multi-axis Confidence evaluation (source quality, consistency, comprehensiveness)
-   - **Output**: Decision support reports + reliability indicators
+#### 4. **Documentation Specialist** ✍️ *Report Creation Expert*
+   - **Primary Function**: Professional report generation with integrated confidence assessment
+   - **Technical Framework**: Advanced document structuring, citation management, evidence presentation
+   - **Quality Metrics**: Multi-dimensional confidence evaluation covering source quality, consistency, and comprehensiveness
+   - **Final Products**: Executive-ready reports with comprehensive reliability indicators
 
-#### 5. **ReflectionCriticAgent** 🎯 *Quality Assurance Specialist*
-   - **Role**: Validation of report quality and Confidence evaluation validity
-   - **Technology**: Meta-cognitive evaluation, logical consistency checks, improvement recommendations
-   - **Standards**: Compliance with enterprise R&D quality standards
-   - **Output**: Quality evaluation reports + improvement guidance
+#### 5. **Quality Review Coordinator** 🎯 *Standards Compliance Expert*
+   - **Primary Function**: Comprehensive validation of report quality and confidence assessment accuracy
+   - **Technical Approach**: Meta-analytical evaluation, logical consistency validation, improvement recommendations
+   - **Compliance Standards**: Adherence to enterprise research and development quality protocols
+   - **Output Generation**: Quality assurance reports with detailed improvement guidance
 
-#### 6. **TranslatorAgent** 🌐 *Multilingual Specialist*
-   - **Role**: High-precision translation with specialized terminology support
-   - **Specialization**: Technical document format preservation, specialized terminology dictionary
-   - **Functions**: Bidirectional Japanese-English translation, context-aware translation
-   - **Quality**: Translation quality evaluation, terminology standardization
+#### 6. **Language Processing Specialist** 🌐 *Multilingual Expert*
+   - **Primary Function**: Professional-grade translation with specialized terminology preservation
+   - **Domain Expertise**: Technical documentation format retention, specialized terminology databases
+   - **Quality Assurance**: Translation accuracy evaluation, terminology consistency management
 
-#### 7. **CitationAgent** 📚 *Citation Management Specialist*
-   - **Role**: Internal document citation and reference management
-   - **Technology**: Automated citation generation, source traceability
-   - **Verification**: Citation accuracy, source existence confirmation
-   - **Output**: Structured citation lists + metadata
+#### 7. **Reference Management Specialist** 📚 *Citation Tracking Expert*
+   - **Primary Function**: Comprehensive citation management for internal organizational documents
+   - **Technical Capabilities**: Automated citation generation, complete source traceability
+   - **Validation Process**: Citation accuracy verification, source availability confirmation
+   - **Final Deliverables**: Comprehensive citation databases with complete metadata tracking
 
 </details>
 
-## 🚀 Setup
+## 🚀 Getting Started
 
-### Prerequisites
+### System Requirements
 
-Before using the Deep Research Agents, ensure you have the following:
+To deploy the Deep Research Agent platform, verify these prerequisites are available:
 
-- **Python 3.12+** (Recommended: 3.12.10 or later)
-- **Azure OpenAI** account with access to:
-  - GPT-4.1, GPT-4.1-mini, o3 or equivalent models
-  - Text embedding models (text-embedding-3-small, text-embedding-3-large, etc.)
-- **Azure AI Search** service with:
-  - Semantic search configuration enabled
-  - Vector search capabilities
-  - Existing search indexes with your enterprise documents
-- **Web Search API** (optional, for web search functionality):
-  - Tavily API key
-  - Currently, this repo only supports Tavily, please implement search providers if you want to use other search engines
+- **Python Environment** (Version 3.12 or higher recommended: 3.12.10+)
+- **Azure OpenAI Services** with appropriate model access:
+  - Advanced language models (GPT-4.1, GPT-4.1-mini, o3, or comparable alternatives)
+  - Text embedding capabilities (text-embedding-3-small, text-embedding-3-large, and similar)
+- **Azure AI Search Infrastructure** configured with:
+  - Semantic search functionality activated
+  - Vector search capabilities enabled
+  - Pre-populated search indexes containing organizational documents
+- **External Search API** (optional enhancement for web research):
+  - Tavily API credentials
+  - Note: Current implementation supports Tavily exclusively; additional search providers require custom implementation
 
-### 📦 Installation
+### 📦 Platform Installation
 
-Follow these step-by-step instructions to set up the Deep Research Agents:
+Complete these sequential steps to establish your Deep Research Agent environment:
 
-#### Step 1: Clone the Repository
+#### Step 1: Repository Acquisition
 ```powershell
 git clone https://github.com/dhangerkapil/deep-research-agent.git
 cd deep-research-agent
 ```
 
-#### Step 2: Create Python Virtual Environment (if needed)
+#### Step 2: Python Environment Preparation
 ```powershell
-# Create virtual environment
+# Establish isolated Python environment
 python -m venv deepresearchagent
 
-# Activate virtual environment
+# Environment activation
 .\deepresearchagent\Scripts\Activate.ps1
 
-# Verify activation (should show the virtual environment path)
+# Environment verification (should display virtual environment path)
 where python
 ```
 
-#### Step 3: Install Python Dependencies
+#### Step 3: Dependency Installation
 ```powershell
 pip install -r requirements.txt
 ```
 
-#### Step 4: Create Configuration Files from Templates
+#### Step 4: Configuration File Generation
 
-**4.1 Create Environment Variables File**
+**4.1 Environment Configuration Setup**
 ```powershell
-# Copy template and create your .env file
+# Generate environment configuration from template
 Copy-Item .env.example .env
 ```
-Please update based on your settings
+*Customize with your specific Azure and API credentials*
 
-**4.2 Create Project Configuration File**
+**4.2 Project Configuration Establishment**
 ```powershell
-# Copy template and create your project configuration
+# Initialize project configuration from template
 Copy-Item config\project_config_templates.yaml config\project_config.yaml
-
 ```
-Please update project configuration with your specific settings
+*Configure according to your organizational requirements*
 
-**Required configurations in `config/project_config.yaml`:**
-- Company information (system.company)
-- **Azure AI Search index configurations (data_sources.document_types)**
-- Web search settings (data_sources.web_search)
-- Agent behavior parameters (agents)
+**Essential configuration elements in `config/project_config.yaml`:**
+- Organizational details (system.company)
+- **Azure AI Search index specifications (data_sources.document_types)**
+- External search configuration (data_sources.web_search)
+- Agent behavioral parameters (agents)
 
-#### Step 5: Launch the script
+#### Step 5: Platform Activation
 ```powershell
-# Start the research agent
+# Initialize the research platform
 python main.py --query "Could you summarize the latest update on Azure OpenAI in 2025?"
 ```
 
-### 🛠️ Configuration Details
+### 🛠️ Configuration Architecture
 
-#### Template File Structure
+#### Template Organization Structure
 
-The system uses template files that you need to copy and customize:
+The platform utilizes a template-based configuration system requiring customization:
 
 ```
-Deep-Research-Agents/
+Enterprise-Research-Platform/
 ├── config/
-│   ├── project_config_templates.yaml # Template for project configuration
-│   └── project_config.yaml           # Your customized configuration (create this)
-├── .env.example                      # Template for environment variables
-└── .env                              # Your environment variables (create this)
+│   ├── project_config_templates.yaml # Configuration template foundation
+│   └── project_config.yaml           # Customized configuration (user-generated)
+├── .env.example                      # Environment template foundation
+└── .env                              # Environment configuration (user-generated)
 ```
 
-## 🌐 Azure Deployment
+## 🌐 Azure Cloud Integration
 
-### Prerequisites for Azure Deployment
+### Azure Deployment Prerequisites
 
 Before deploying to Azure, ensure you have:
 
