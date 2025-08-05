@@ -575,6 +575,8 @@ async def root():
         <script>
             let currentTaskId = null;
             let pollInterval = null;
+            let pollCount = 0;
+            const MAX_POLL_COUNT = 900; // 15 minutes at 1 second intervals (increased from 5 minutes)
             let progressLogs = '';
             let logCounter = 0;
 
@@ -738,11 +740,28 @@ async def root():
 
             function startPolling() {
                 addLogEntry('🔍 Monitoring research progress...', 'info');
+                pollCount = 0; // Reset poll counter
                 
                 pollInterval = setInterval(async () => {
                     try {
+                        pollCount++;
+                        
+                        // Timeout check
+                        if (pollCount > MAX_POLL_COUNT) {
+                            console.warn('Polling timeout reached');
+                            clearInterval(pollInterval);
+                            addLogEntry('⏰ Research timeout - please try again', 'error');
+                            updateProgress('Research timeout', 'Timeout');
+                            document.getElementById('submitBtn').disabled = false;
+                            document.getElementById('submitBtn').textContent = 'START RESEARCH';
+                            return;
+                        }
+                        
                         const response = await fetch(`/research/${currentTaskId}`);
                         const data = await response.json();
+                        
+                        // Add detailed debugging
+                        console.log('Polling response:', data);
                         
                         // Update status in Results tab
                         updateProgress(data.progress || 'Processing...', data.status);
@@ -772,7 +791,13 @@ async def root():
                             }
                         }
                         
-                        if (data.status === 'completed') {
+                        // Check for completion with detailed logging and multiple conditions
+                        if ((data.status === 'completed' && data.result) || 
+                            (data.result && data.result.length > 1000) || // Substantial result received
+                            (data.progress && data.progress.includes('completed successfully'))) {
+                            
+                            console.log('Research completed - stopping polling');
+                            console.log('Completion detected by:', data.status === 'completed' ? 'status' : 'result length or progress');
                             clearInterval(pollInterval);
                             addLogEntry('✅ Research completed successfully!', 'success');
                             addLogEntry('📊 Formatting results for display...', 'info');
@@ -795,6 +820,7 @@ async def root():
                             document.getElementById('submitBtn').textContent = 'START RESEARCH';
                             
                         } else if (data.status === 'failed') {
+                            console.log('Research failed - stopping polling');
                             clearInterval(pollInterval);
                             addLogEntry(`❌ Research failed: ${data.error}`, 'error');
                             updateProgress(`Research failed: ${data.error}`, 'Failed');
@@ -807,7 +833,7 @@ async def root():
                         addLogEntry(`❌ Error checking research status: ${error.message}`, 'error');
                         updateProgress(`Error: ${error.message}`, 'Error');
                     }
-                }, 800); // Poll every 0.8 seconds for responsive updates
+                }, 1000); // Poll every 1 second for more reliable updates
             }
 
             // Make switchTab available globally
@@ -875,6 +901,7 @@ async def run_research(task_id: str, query: str, session_id: Optional[str] = Non
         # Execute the actual research
         logger.info(f"🔍 Starting actual research for query: {query}")
         tasks_store[task_id]["progress"] = "🎯 Executing core research logic..."
+        tasks_store[task_id]["status"] = "running"
         
         # Simple fallback if agent is not available
         if not agent_instance:
@@ -898,21 +925,45 @@ This is a test response generated while the Deep Research Agent system is initia
 *Note: This is a demonstration response. Full research capabilities with Azure AI Search integration will be available once all components are properly configured.*
             """
         else:
-            result = await agent_instance.research(query=query)
+            # Set a longer timeout for agent research
+            try:
+                result = await asyncio.wait_for(
+                    agent_instance.research(query=query), 
+                    timeout=900  # 15 minutes timeout
+                )
+            except asyncio.TimeoutError:
+                logger.error(f"Research timed out after 15 minutes for task: {task_id}")
+                tasks_store[task_id]["status"] = "failed"
+                tasks_store[task_id]["error"] = "Research timed out after 15 minutes"
+                tasks_store[task_id]["progress"] = "❌ Research timed out - please try a more specific query"
+                return
+            except Exception as research_error:
+                logger.error(f"Research execution error: {research_error}")
+                raise research_error
         
-        # Final completion
-        tasks_store[task_id]["status"] = "completed"
-        tasks_store[task_id]["result"] = result
-        tasks_store[task_id]["progress"] = "✅ Research completed successfully! Results ready for display."
-        
+        # Final completion - ensure atomic update
         logger.info(f"✅ Research completed for task: {task_id}")
+        logger.info(f"📊 Result length: {len(result) if result else 0} characters")
+        
+        # Atomic update of task completion
+        tasks_store[task_id].update({
+            "status": "completed",
+            "result": result,
+            "progress": "✅ Research completed successfully! Results ready for display."
+        })
+        
+        logger.info(f"📝 Task {task_id} status updated to: {tasks_store[task_id]['status']}")
         
     except Exception as e:
         logger.error(f"❌ Research failed for task {task_id}: {e}")
         logger.exception("Full error details:")
-        tasks_store[task_id]["status"] = "failed"
-        tasks_store[task_id]["error"] = str(e)
-        tasks_store[task_id]["progress"] = f"❌ Research failed: {str(e)}"
+        
+        # Atomic update of task failure
+        tasks_store[task_id].update({
+            "status": "failed",
+            "error": str(e),
+            "progress": f"❌ Research failed: {str(e)}"
+        })
 
 @app.post("/research", response_model=ResearchResponse)
 async def start_research(request: ResearchRequest, background_tasks: BackgroundTasks):
