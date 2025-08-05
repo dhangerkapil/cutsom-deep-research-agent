@@ -23,6 +23,12 @@ wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
+
+# Exception: Allow our source code lib directory
+!lib/
+lib/__pycache__/
+lib/*/__pycache__/
+lib/*/*/__pycache__/
 *.egg
 MANIFEST
 
